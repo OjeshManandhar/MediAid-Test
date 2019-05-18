@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
+import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import Home from './screens/Home';
-import Away from './screens/Away';
-
-class App extends Component {
-    render() {
-        return (
-            <View style = { styles.viewStyle }>
-                <Home />
-            </View>
-        );
-    }
+class HomeScreen extends React.Component {
+  render() {
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Home Screen</Text>
+      </View>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-    viewStyle: {
-        flex: 1
-    }
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: HomeScreen
+  }
 });
 
-export default App;
+export default createAppContainer(AppNavigator);
