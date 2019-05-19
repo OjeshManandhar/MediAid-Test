@@ -7,7 +7,10 @@ class GotoText extends React.Component {
 
         return (
             <View style = { viewStyle }>
-                <Text style = { textStyle }>Press to goto { this.props.pageName }</Text>
+                <Text 
+                    style = { textStyle }
+                    onPress={ () => this.props.navigation.navigate( this.props.target ) }
+                >Press to goto { this.props.target }</Text>
             </View>
         );
     }

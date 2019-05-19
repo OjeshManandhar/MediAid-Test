@@ -11,7 +11,7 @@ class Away extends React.Component {
         return (
             <View style = { viewStyle }>
                 <View style = { gotoTextStyle } >
-                    <GotoText pageName = 'Home'/>
+                    <GotoText navigation = {this.props.navigation} target = 'Home' />
                 </View>
                 <View style = { navBarStyle } >
                     <NavBar />
