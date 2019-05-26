@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 class GotoText extends React.Component {
     render() {
+        console.log(this.props.navigation);
         const { viewStyle, textStyle } = styles;
 
         return (
@@ -21,10 +22,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#bbb'
+        backgroundColor: '#eee'
     },
     textStyle: {
-        color: '#0000aa'
+        color: '#0000aa',
+        fontSize: 20
     }
 });
 

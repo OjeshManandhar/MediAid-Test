@@ -1,35 +1,68 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 class NavBar extends Component {
+    homeStyle() {
+        if (this.props.selected === 'Home') {
+            return (styles.selected);
+        }
+        else if (this.props.selected === 'Away') {
+            return (styles.notSelected);
+        }
+    }
+
+    awayStyle() {
+        if (this.props.selected === 'Home') {
+            return (styles.notSelected);
+        }
+        else if (this.props.selected === 'Away') {
+            return (styles.selected);
+        }
+    }
+
     render() {
-        return (
-            <View style={styles.viewStyle}>
-                <Image source={require('./../assets/NavBarIcons/events.png')} style={styles.normal} />
-                <Image source={require('./../assets/NavBarIcons/schedule.png')} style={styles.normal} />
-                <Image source={require('./../assets/NavBarIcons/call.png')} style={styles.large} />
-                <Image source={require('./../assets/NavBarIcons/filter.png')} style={styles.normal} />
-                <Image source={require('./../assets/NavBarIcons/account.png')} style={styles.normal} />
+        return(
+            <View style = {styles.container}>
+                <TouchableOpacity 
+                    onPress={ () => this.props.navigation.navigate( 'Home' ) }
+                    style = { this.homeStyle() }
+                >
+                    <Text style = { styles.textStyle }>Home</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                    onPress={ () => this.props.navigation.navigate( 'Away' ) }
+                    style = { this.awayStyle() }
+                >
+                    <Text style = { styles.textStyle }>Away</Text>
+                </TouchableOpacity>
             </View>
         );
     }
 }
 
 const styles = StyleSheet.create({
-    viewStyle: {
-        flex: 1,
+    container: {
+        flex: 0.975,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'stretch'
     },
-    normal: {
-        width: 30,
-        height: 30
+    selected: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#eeeeee'
     },
-    large: {
-        width: 50,
-        height: 50,
-        marginBottom: 15
+    notSelected: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#ffffff'
+    },
+    textStyle: {
+        fontSize: 25,
+        color: '#000000',
     }
 });
 

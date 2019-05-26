@@ -1,20 +1,28 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
 import GotoText from '../components/GotoText';
 import NavBar from '../components/NavBar';
 
+const view = !null;
+
 class Away extends React.Component {
+    static navigationOptions = {
+        header: undefined
+    };
+
     render() {
+        console.log('Away page');
+
         const { viewStyle, navBarStyle, gotoTextStyle } = styles;
 
         return (
             <View style = { viewStyle }>
+                <View style = { navBarStyle } >
+                    <NavBar navigation = {this.props.navigation} selected = 'Away' />
+                </View>
                 <View style = { gotoTextStyle } >
                     <GotoText navigation = {this.props.navigation} target = 'Home' />
-                </View>
-                <View style = { navBarStyle } >
-                    <NavBar />
                 </View>
             </View>
         );
@@ -26,10 +34,11 @@ const styles = StyleSheet.create({
         flex: 1
     },
     gotoTextStyle: {
-        flex: 11
+        flex: 1
     },
     navBarStyle: {
-        flex: 1
+        height: 50,
+        backgroundColor: '#550000'
     }
 });
 
