@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     viewStyle: {
         flex: 1,
     },
-    gotoTextStyle: {
-        flex: 1
-    },
     navBarStyle: {
         height: 50,
         backgroundColor: '#aa0000'
+    },
+    gotoTextStyle: {
+        flex: 1
     }
 });
 
