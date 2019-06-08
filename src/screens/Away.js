@@ -14,7 +14,7 @@ class Away extends React.Component {
     render() {
         console.log('Away page');
 
-        const { viewStyle, navBarStyle, formStyle } = styles;
+        const { viewStyle, navBarStyle, gotoTextStyle } = styles;
 
         return (
             <View style = { viewStyle }>
@@ -33,10 +33,9 @@ const styles = StyleSheet.create({
     viewStyle: {
         flex: 1
     },
-    // navBarStyle: {
-    //     height: 50,
-    //     backgroundColor: '#aa0000'
-    // },
+    navBarStyle: {
+        height: 50
+    },
     gotoTextStyle: {
         flex: 1
     }

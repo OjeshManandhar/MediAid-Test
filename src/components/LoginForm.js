@@ -3,9 +3,9 @@ import {
     View,
     StyleSheet,
     TextInput,
-    Text,
-    Button
+    Text
 } from 'react-native';
+import Button from './Button';
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -18,11 +18,20 @@ class LoginForm extends React.Component {
         };
     }
 
+    logIn() {
+        console.log(this.state);
+    }
+
+    signUp() {
+        console.log(this.state);
+    }
+
     render() {
         return(
             <View style={styles.container}>
                 <Text style={styles.textStyle} >Username:</Text>
                 <TextInput 
+                    placeholder='Jon Snow'
                     value={this.state.username}
                     style={styles.inputBoxStyle}
                     onChangeText={username => this.setState({ username })}
@@ -30,6 +39,7 @@ class LoginForm extends React.Component {
 
                 <Text style={styles.textStyle} >Phone Number:</Text>
                 <TextInput 
+                    placeholder='+9779812345678'
                     value={this.state.phoneNumber}
                     style={styles.inputBoxStyle}
                     onChangeText={phoneNumber => this.setState({ phoneNumber })}
@@ -37,13 +47,20 @@ class LoginForm extends React.Component {
 
                 <Text style={styles.textStyle} >Password:</Text>
                 <TextInput 
+                    placeholder='password'
                     secureTextEntry
                     value={this.state.password}
                     style={styles.inputBoxStyle}
                     onChangeText={password => this.setState({ password })}
                 />
 
-                <Button title="Login"/>
+                <View style={styles.buttonStyle}>
+                    <Button onPress={() => this.logIn()}>Login</Button>
+                </View>
+
+                <View style={styles.buttonStyle}>
+                    <Button onPress={() => this.signUp()}>Sign Up</Button>
+                </View>
             </View>
         );
     }
@@ -58,22 +75,24 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontSize: 18,
-        color: '#00aaff',
+        color: '#7777ff',
         marginBottom: 5
     },
     inputBoxStyle: {
-        height: 40,
         width: 300,
         fontSize: 18,
-        marginBottom: 15,
+        paddingRight: 20,
+        paddingLeft: 20,
+        marginBottom: 20,
         borderWidth: 2,
-        borderRadius: 5
+        borderRadius: 20,
+        paddingTop: 5,
+        paddingBottom: 5
     },
     buttonStyle: {
-        fontSize: 18,
-        height: 20,
-        width: 50,
-        borderRadius: 5
+        height: 40,
+        width: 300,
+        marginBottom: 20,
     }
 });
 

@@ -29,8 +29,7 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     navBarStyle: {
-        height: 50,
-        backgroundColor: '#aa0000'
+        height: 50
     },
     formStyle: {
         flex: 1
