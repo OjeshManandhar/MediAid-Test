@@ -5,10 +5,6 @@ import GotoText from '../components/GotoText';
 import NavBar from '../components/NavBar';
 
 class Away extends React.Component {
-    static navigationOptions = {
-        header: undefined
-    };
-
     render() {
         console.log('Away page');
 

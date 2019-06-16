@@ -5,6 +5,11 @@ import GotoText from '../components/GotoText';
 import NavBar from '../components/NavBar';
 
 class Home extends React.Component {
+    static navigationOptions = {
+        header: undefined,
+        title: 'Home'
+    };
+    
     render() {
         console.log('Home page');
 
