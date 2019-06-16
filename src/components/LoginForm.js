@@ -5,6 +5,9 @@ import {
     TextInput,
     Text
 } from 'react-native';
+
+import firebase from 'firebase';
+
 import Button from './Button';
 
 class LoginForm extends React.Component {
@@ -13,7 +16,7 @@ class LoginForm extends React.Component {
 
         this.state = {
             username: '',
-            phoneNumber: '',
+            email: '',
             password: ''
         };
     }
@@ -37,12 +40,12 @@ class LoginForm extends React.Component {
                     onChangeText={username => this.setState({ username })}
                 />
 
-                <Text style={styles.textStyle} >Phone Number:</Text>
+                <Text style={styles.textStyle} >Email:</Text>
                 <TextInput 
-                    placeholder='+9779812345678'
-                    value={this.state.phoneNumber}
+                    placeholder='jon.snow@got.com'
+                    value={this.state.email}
                     style={styles.inputBoxStyle}
-                    onChangeText={phoneNumber => this.setState({ phoneNumber })}
+                    onChangeText={email => this.setState({ email })}
                 />
 
                 <Text style={styles.textStyle} >Password:</Text>
@@ -80,6 +83,7 @@ const styles = StyleSheet.create({
     },
     inputBoxStyle: {
         width: 300,
+        height: 40,
         fontSize: 18,
         paddingRight: 20,
         paddingLeft: 20,
@@ -90,8 +94,6 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     buttonStyle: {
-        height: 40,
-        width: 300,
         marginBottom: 20,
     }
 });

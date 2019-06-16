@@ -1,5 +1,5 @@
 import React from 'react';
-import { ScrollView, View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 import NavBar from '../components/NavBar';
 import LoginForm from '../components/LoginForm';
@@ -8,12 +8,12 @@ class Home extends React.Component {
     render() {
         console.log('Home page');
 
-        const { viewStyle, navBarStyle, formStyle } = styles;
+        const { viewStyle, navBarStyle, contentStyle } = styles;
         
         return (
-            <View style = { viewStyle }>
-                <View style = { formStyle } >
-                    <LoginForm />
+            <View style = {viewStyle}>
+                <View style = { contentStyle } >
+                    <LoginForm navigation = {this. props.navigation}/>
                 </View>
 
                 <View style = { navBarStyle } >
@@ -26,13 +26,15 @@ class Home extends React.Component {
 
 const styles = StyleSheet.create({
     viewStyle: {
-        flex: 1,
+        flex: 1
     },
     navBarStyle: {
         height: 50
     },
-    formStyle: {
-        flex: 1
+    contentStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 

@@ -12,22 +12,14 @@ class Button extends React.Component {
                     {this.props.children}
                 </Text>
             </TouchableOpacity>
-
-            // <TouchableOpacity 
-            //     style={styles.container}
-            //     onPress={this.props.onPress}
-            // >
-            //     <Text style={styles.textStyle}>
-            //         {this.props.children}
-            //     </Text>
-            // </TouchableOpacity>
         );
     }
 }
 
 const styles=StyleSheet.create({
     container: {
-        flex: 1,
+        width: 300,
+        height: 40,
         justifyContent:'center',
         alignItems: 'center',
         backgroundColor: '#fff',
