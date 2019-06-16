@@ -43,7 +43,7 @@ class NavBar extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 0.975,
+        flex: 1,
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'stretch'

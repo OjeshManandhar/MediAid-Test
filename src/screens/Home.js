@@ -12,11 +12,11 @@ class Home extends React.Component {
         
         return (
             <View style = { viewStyle }>
-                <View style = { navBarStyle } >
-                    <NavBar navigation = {this.props.navigation} selected = 'Home' />
-                </View>
                 <View style = { gotoTextStyle } >
                     <GotoText navigation = {this.props.navigation} target = 'Away' />
+                </View>
+                <View style = { navBarStyle } >
+                    <NavBar navigation = {this.props.navigation} selected = 'Home' />
                 </View>
             </View>
         );
@@ -27,12 +27,11 @@ const styles = StyleSheet.create({
     viewStyle: {
         flex: 1,
     },
-    navBarStyle: {
-        height: 50,
-        backgroundColor: '#aa0000'
-    },
     gotoTextStyle: {
         flex: 1
+    },
+    navBarStyle: {
+        height: 50
     }
 });
 
