@@ -1,3 +1,4 @@
+import React from 'react';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import firebase from 'firebase';
 import firebaseKeys from './assets/firebaseKeys';
