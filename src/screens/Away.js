@@ -7,11 +7,6 @@ import Loading from './../components/Loading';
 import NavBar from './../components/NavBar';
 
 class Away extends React.Component {
-    static navigationOptions = {
-        header: undefined,
-        title: 'Away'
-    };
-
     constructor(props) {
         super(props);
 

@@ -1,27 +1,23 @@
 import React from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
+import firebase from 'firebase';
 
 import Button from './Button';
 
 class Profile extends React.Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            user: null
-        }
-    }
-
     SignOut() {
         console.log('Sign Out');
-        Alert.alert(
-            'Sign Out',
-            'You have pressed Sign Out',
-            [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-            ],
-            { cancelable: false }
-          );
+
+        // Alert.alert(
+        //     'Sign Out',
+        //     'You have pressed Sign Out',
+        //     [
+        //         {text: 'OK', onPress: () => console.log('OK Pressed')},
+        //     ],
+        //     { cancelable: false }
+        // );
+
+        firebase.auth().signOut();
     }
 
     render() {
