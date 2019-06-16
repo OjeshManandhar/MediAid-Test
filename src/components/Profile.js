@@ -1,15 +1,13 @@
 import React from 'react';
 import { View, StyleSheet, Alert } from 'react-native';
 
-import NavBar from './../components/NavBar';
-import Button from './../components/Button';
+import Button from './Button';
 
 class Profile extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            logedIn: null,
             user: null
         }
     }
@@ -29,12 +27,7 @@ class Profile extends React.Component {
     render() {
         return(
             <View style={styles.container}>
-                <View style={styles.contentStyle}>
-                    <Button onPress={() => this.SignOut()}>Sign Out</Button>
-                </View>
-                <View style={styles.navBarStyle}>
-                    <NavBar navigation={this.props.navigation} selected='Profile' />
-                </View>
+                <Button onPress={() => this.SignOut()}>Sign Out</Button>
             </View>
         );
     }
@@ -42,15 +35,9 @@ class Profile extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
-    },
-    contentStyle: {
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
-    },
-    navBarStyle: {
-        height: 50
     }
 });
 

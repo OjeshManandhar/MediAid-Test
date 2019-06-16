@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
+import firebase from 'firebase';
 
 import GotoText from '../components/GotoText';
 import NavBar from '../components/NavBar';
@@ -9,6 +10,19 @@ class Away extends React.Component {
         header: undefined,
         title: 'Away'
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            logedIn: null,
+            user: null
+        }
+    }
+
+    componentWillMount() {
+
+    }
     
     render() {
         console.log('Away page');
