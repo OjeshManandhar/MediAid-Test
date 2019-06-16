@@ -4,11 +4,17 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 
 import Home from './screens/Home';
 import Away from './screens/Away';
+import Profile from './screens/Profile';
+import SignIn from './screens/SignIn';
+import SignUp from './screens/SignUp';
 
 const AppNavigator = createStackNavigator(
     {
         Home: { screen: Home },
-        Away: { screen: Away }
+        Away: { screen: Away },
+        Profile: { screen: Profile },
+        SignIn: { screen: SignIn },
+        SignUp: { screen: SignUp }
     },
     {
         initialRouteName: "Home",
