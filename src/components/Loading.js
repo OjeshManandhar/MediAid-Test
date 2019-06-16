@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 
-class SignUp extends React.Component {
+class Loading extends React.Component {
     render() {
         return(
-            <View>
-                <Text>Sign Up</Text>
+            <View style = {styles.container}>
+                < ActivityIndicator size='large' />
             </View>
         );
     }
@@ -14,10 +14,9 @@ class SignUp extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
     }
 });
 
-export default SignUp;
+export default Loading;

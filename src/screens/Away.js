@@ -2,8 +2,9 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import firebase from 'firebase';
 
-import GotoText from '../components/GotoText';
-import NavBar from '../components/NavBar';
+import Profile from './../components/Profile';
+import Loading from './../components/Loading';
+import NavBar from './../components/NavBar';
 
 class Away extends React.Component {
     static navigationOptions = {
@@ -15,13 +16,30 @@ class Away extends React.Component {
         super(props);
 
         this.state = {
-            logedIn: null,
+            loggedIn: null,
             user: null
         }
     }
 
     componentWillMount() {
+        firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                this.setState({ loggedIn: true });
+            } else {
+                this.setState({ loggedIn: false });
+            }
+        });
+    }
 
+    renderContent() {
+        switch (this.state.loggedIn) {
+            case true:
+                return <Profile user={ this.state.user } />
+            case false:
+                this.props.navigation.navigate('SignIn');
+            default:
+                return <Loading />
+        }
     }
     
     render() {
@@ -32,7 +50,7 @@ class Away extends React.Component {
         return (
             <View style = { viewStyle }>
                 <View style = { contentStyle } >
-                    <GotoText navigation = {this.props.navigation} target = 'Home' />
+                    {this.renderContent()}
                 </View>
                 <View style = { navBarStyle } >
                     <NavBar navigation = {this.props.navigation} selected = 'Away' />
