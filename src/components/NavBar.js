@@ -6,17 +6,17 @@ class NavBar extends Component {
         if (this.props.selected === 'Home') {
             return (styles.selected);
         }
-        else if (this.props.selected === 'Away') {
+        else {
             return (styles.notSelected);
         }
     }
 
-    awayStyle() {
-        if (this.props.selected === 'Home') {
-            return (styles.notSelected);
-        }
-        else if (this.props.selected === 'Away') {
+    profileStyle() {
+        if (this.props.selected === 'Profile') {
             return (styles.selected);
+        }
+        else {
+            return (styles.notSelected);
         }
     }
 
@@ -31,10 +31,10 @@ class NavBar extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={ () => this.props.navigation.navigate( 'Away' ) }
-                    style = { this.awayStyle() }
+                    onPress={ () => this.props.navigation.navigate( 'Profile' ) }
+                    style = { this.profileStyle() }
                 >
-                    <Text style = { styles.textStyle }>Away</Text>
+                    <Text style = { styles.textStyle }>Profile</Text>
                 </TouchableOpacity>
             </View>
         );
