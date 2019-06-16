@@ -11,8 +11,8 @@ class NavBar extends Component {
         }
     }
 
-    profileStyle() {
-        if (this.props.selected === 'Profile') {
+    awayStyle() {
+        if (this.props.selected === 'Away') {
             return (styles.selected);
         }
         else {
@@ -31,10 +31,10 @@ class NavBar extends Component {
                 </TouchableOpacity>
 
                 <TouchableOpacity 
-                    onPress={ () => this.props.navigation.navigate( 'Profile' ) }
-                    style = { this.profileStyle() }
+                    onPress={ () => this.props.navigation.navigate( 'Away' ) }
+                    style = { this.awayStyle() }
                 >
-                    <Text style = { styles.textStyle }>Profile</Text>
+                    <Text style = { styles.textStyle }>Away</Text>
                 </TouchableOpacity>
             </View>
         );

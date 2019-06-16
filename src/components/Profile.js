@@ -5,6 +5,15 @@ import NavBar from './../components/NavBar';
 import Button from './../components/Button';
 
 class Profile extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            logedIn: null,
+            user: null
+        }
+    }
+
     SignOut() {
         console.log('Sign Out');
         Alert.alert(
