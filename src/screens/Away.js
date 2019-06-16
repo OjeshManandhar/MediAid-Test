@@ -5,14 +5,19 @@ import GotoText from '../components/GotoText';
 import NavBar from '../components/NavBar';
 
 class Away extends React.Component {
+    static navigationOptions = {
+        header: undefined,
+        title: 'Away'
+    };
+    
     render() {
         console.log('Away page');
 
-        const { viewStyle, navBarStyle, gotoTextStyle } = styles;
+        const { viewStyle, navBarStyle, contentStyle } = styles;
 
         return (
             <View style = { viewStyle }>
-                <View style = { gotoTextStyle } >
+                <View style = { contentStyle } >
                     <GotoText navigation = {this.props.navigation} target = 'Home' />
                 </View>
                 <View style = { navBarStyle } >
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
     viewStyle: {
         flex: 1
     },
-    gotoTextStyle: {
+    contentStyle: {
         flex: 1
     },
     navBarStyle: {
