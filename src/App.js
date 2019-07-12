@@ -5,15 +5,11 @@ import firebaseKeys from './assets/firebaseKeys';
 
 import Home from './screens/Home';
 import Away from './screens/Away';
-import SignIn from './screens/SignIn';
-import SignUp from './screens/SignUp';
 
 const AppNavigator = createStackNavigator(
     {
         Home: { screen: Home },
-        Away: { screen: Away },
-        SignIn: { screen: SignIn },
-        SignUp: { screen: SignUp }
+        Away: { screen: Away }
     },
     {
         initialRouteName: "Home",
@@ -29,7 +25,6 @@ const AppNavigator = createStackNavigator(
 
 // Render through a class
 // ------------------------------- 
-
 const AppContainer = createAppContainer(AppNavigator);
 
 export default class App extends React.Component {
@@ -41,5 +36,4 @@ export default class App extends React.Component {
         return <AppContainer />;
     }
 }
-
 // -------------------------------

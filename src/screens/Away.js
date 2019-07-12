@@ -4,6 +4,8 @@ import firebase from 'firebase';
 
 import Profile from './../components/Profile';
 import Loading from './../components/Loading';
+import SignIn from './../components/SignIn';
+import SignUp from './../components/SignUp';
 import NavBar from './../components/NavBar';
 
 class Away extends React.Component {
@@ -11,7 +13,10 @@ class Away extends React.Component {
         super(props);
 
         this.state = {
-            loggedIn: null,
+            // compToRender => Component To Render
+            // can have followinf values:
+            // loading, profile, signIn, signUp
+            compToRender: 'loading',
             user: null
         }
     }
@@ -19,22 +24,29 @@ class Away extends React.Component {
     componentWillMount() {
         firebase.auth().onAuthStateChanged(user => {
             if (user) {
-                this.setState({ loggedIn: true });
+                this.setState({
+                    compToRender: 'profile',
+                    user: user
+                });
             } else {
-                this.setState({ loggedIn: false });
+                this.setState({ compToRender: 'signIn' });
             }
         });
     }
 
+    updateState(newState) {
+        this.setState(newState);
+    }
+
     renderContent() {
-        switch (this.state.loggedIn) {
-            case true:
-                return <Profile user={ this.state.user } />
-            case false:
-                this.props.navigation.navigate('SignIn');
-            default:
-                return <Loading />
-        }
+        if (this.state.compToRender === 'profile')
+            return <Profile />
+        else if (this.state.compToRender === 'signIn')
+            return <SignIn />
+        else if (this.state.compToRender === 'signUp')
+            return <SignUp />
+        else
+            return <Loading />
     }
     
     render() {
