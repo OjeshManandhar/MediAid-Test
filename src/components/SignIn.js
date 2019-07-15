@@ -70,10 +70,6 @@ class SignIn extends React.Component {
                 <View style={styles.buttonStyle}>
                     { this.renderButton() }
                 </View>
-
-                <Text style={styles.textStyle}>
-                    Don't have an account, <Text style={styles.labelStyle}>Sign Up</Text>
-                </Text>
             </View>
         );
     }
@@ -81,7 +77,7 @@ class SignIn extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
@@ -105,11 +101,6 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         marginBottom: 20,
-    },
-    textStyle: {
-        fontSize: 18,
-        color: '#000',
-        marginBottom: 5
     }
 });
 

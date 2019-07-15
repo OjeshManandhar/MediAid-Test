@@ -34,19 +34,42 @@ class Away extends React.Component {
         });
     }
 
-    updateState(newState) {
-        this.setState(newState);
-    }
-
     renderContent() {
         if (this.state.compToRender === 'profile')
-            return <Profile />
+            return <Profile uid={ this.state.user.uid }/>
         else if (this.state.compToRender === 'signIn')
             return <SignIn />
         else if (this.state.compToRender === 'signUp')
             return <SignUp />
         else
             return <Loading />
+    }
+
+    renderText() {
+        if (this.state.compToRender === 'signIn')
+            return (
+                <Text style={styles.textStyle}>
+                    Don't have an account, <Text 
+                        style={{ color: '#7777ff' }}
+                        onPress= {() => this.setState({ compToRender: 'signUp' })}
+                    >
+                        Sign Up
+                    </Text>
+                </Text>
+            );
+        else if (this.state.compToRender === 'signUp')
+            return (
+                <Text style={styles.textStyle}>
+                    Already have an account, <Text 
+                        style={{ color: '#7777ff' }}
+                        onPress= {() => this.setState({ compToRender: 'signIn' })}
+                    >
+                        Sign In
+                    </Text>
+                </Text>
+            );
+        else
+            return null;
     }
     
     render() {
@@ -58,6 +81,7 @@ class Away extends React.Component {
             <View style = { viewStyle }>
                 <View style = { contentStyle } >
                     {this.renderContent()}
+                    {this.renderText()}
                 </View>
                 <View style = { navBarStyle } >
                     <NavBar navigation = {this.props.navigation} selected = 'Away' />
@@ -72,7 +96,15 @@ const styles = StyleSheet.create({
         flex: 1
     },
     contentStyle: {
-        flex: 1
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    textStyle: {
+        fontSize: 18,
+        color: '#000',
+        marginBottom: 5
     },
     navBarStyle: {
         height: 50

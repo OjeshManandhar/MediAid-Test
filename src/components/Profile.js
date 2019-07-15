@@ -23,7 +23,7 @@ class Profile extends React.Component {
     render() {
         return(
             <View style={styles.container}>
-                <Button onPress={() => this.SignOut()}>Sign Out</Button>
+                <Button onPress={() => this.SignOut()}>{ this.props.uid }</Button>
             </View>
         );
     }

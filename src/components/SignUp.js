@@ -9,6 +9,7 @@ import {
 import firebase from 'firebase';
 
 import Button from './Button';
+import LoadingButton from './LoadingButton';
 
 class SignUp extends React.Component {
     constructor(props) {
@@ -16,7 +17,8 @@ class SignUp extends React.Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            loadingButton: false
         };
     }
 
@@ -24,7 +26,23 @@ class SignUp extends React.Component {
         console.log(this.state);
 
         firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(this.props.navigation.navigation('Away'));
+            .then(() => {
+                this.setState({ loadingButton: false });
+            })
+            .catch(() => {
+                this.setState({
+                    email: '',
+                    password:'',
+                    loadingButton: false });
+            });
+    }
+
+    renderButton() {
+        if (this.state.loadingButton) {
+            return <LoadingButton />
+        }
+
+        return <Button onPress={() => this.signIn()}>Sign Up</Button>
     }
 
     render() {
@@ -48,12 +66,8 @@ class SignUp extends React.Component {
                 />
 
                 <View style={styles.buttonStyle}>
-                    <Button onPress={() => this.signUp()}>Sign Up</Button>
+                    { this.renderButton() }
                 </View>
-
-                <Text style={styles.textStyle}>
-                    Already have an account, <Text style={styles.labelStyle}>Sign In</Text>
-                </Text>
             </View>
         );
     }
@@ -61,7 +75,7 @@ class SignUp extends React.Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        // flex: 1,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center'
@@ -85,11 +99,6 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         marginBottom: 20,
-    },
-    textStyle: {
-        fontSize: 18,
-        color: '#000',
-        marginBottom: 5
     }
 });
 
