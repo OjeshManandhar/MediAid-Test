@@ -8,11 +8,16 @@ import {
     Picker
 } from 'react-native';
 
-import Button from './../components/Button';
-import LoadingButton from './../components/LoadingButton';
-import NavBar from './../components/NavBar';
+import Button from '../components/Button';
+import LoadingButton from '../components/LoadingButton';
+import NavBar from '../components/NavBar';
 
-class Database extends React.Component {
+class AddData extends React.Component {
+    static navigationOptions = {
+        header: undefined,
+        title: 'Add data'
+    };
+
     constructor(props) {
         super(props);
 
@@ -22,8 +27,13 @@ class Database extends React.Component {
             lat: null,
             lang: null,
             type: null,
-            fee: null
+            fee: null,
+            loadingButton: false
         };
+    }
+
+    addData() {
+        console.log('Given Data:', this.state);
     }
 
     renderButton() {
@@ -31,7 +41,7 @@ class Database extends React.Component {
             return <LoadingButton />
         }
 
-        return <Button onPress={() => this.signIn()}>Add data</Button>
+        return <Button onPress={() => this.addData()}>Add data</Button>
     }
 
     render() {
@@ -90,10 +100,6 @@ class Database extends React.Component {
                     <View style={styles.buttonStyle}>
                         { this.renderButton() }
                     </View>
-
-                    <View style={styles.buttonStyle}>
-                        { this.renderButton() }
-                    </View>
                 </ScrollView>
 
                 <View style = { styles.navBarStyle } >
@@ -138,4 +144,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default Database;
+export default AddData;
