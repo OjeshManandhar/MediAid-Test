@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 class GotoText extends React.Component {
     render() {
-        console.log(this.props.navigation);
+        // console.log(this.props.navigation);
         const { viewStyle, textStyle } = styles;
 
         return (

@@ -20,9 +20,11 @@ class Home extends React.Component {
                 <View style = { gotoTextStyle } >
                     <GotoText navigation = {this.props.navigation} target = 'AddData' />
                 </View>
+
                 <View style = { gotoTextStyle } >
                     <GotoText navigation = {this.props.navigation} target = 'ViewData' />
                 </View>
+
                 <View style = { navBarStyle } >
                     <NavBar navigation = {this.props.navigation} selected = 'Home' />
                 </View>
