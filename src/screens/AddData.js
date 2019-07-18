@@ -34,6 +34,16 @@ class AddData extends React.Component {
 
     addData() {
         console.log('Given Data:', this.state);
+
+        this.setState({
+            name: null,
+            location: null,
+            lat: null,
+            lang: null,
+            type: null,
+            fee: null,
+            loadingButton: false
+        });
     }
 
     renderButton() {
