@@ -100,11 +100,8 @@ class AddData extends React.Component {
                     <View style={styles.buttonStyle}>
                         { this.renderButton() }
                     </View>
-                </ScrollView>
 
-                <View style = { styles.navBarStyle } >
-                    <NavBar navigation = {this.props.navigation} selected = 'Home' />
-                </View>
+                </ScrollView>
             </View>
         );
     }
@@ -138,9 +135,6 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         marginBottom: 20,
-    },
-    navBarStyle: {
-        height: 50
     }
 });
 
