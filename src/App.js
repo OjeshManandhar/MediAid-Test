@@ -3,14 +3,15 @@ import { createStackNavigator, createAppContainer } from "react-navigation";
 import firebase from 'firebase';
 import firebaseKeys from './assets/firebaseKeys';
 
-// import Home from './screens/Home';
+import Home from './screens/Home';
 import Away from './screens/Away';
-import Database from './screens/Database';
+import AddData from './screens/AddData';
 
 const AppNavigator = createStackNavigator(
     {
-        Home: { screen: Database },
-        Away: { screen: Away }
+        Home: { screen: Home },
+        Away: { screen: Away },
+        AddData: { screen: AddData }
     },
     {
         initialRouteName: "Home",
