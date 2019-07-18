@@ -7,6 +7,7 @@ import {
     Text,
     Picker
 } from 'react-native';
+import firebase from 'firebase';
 
 import Button from '../components/Button';
 import LoadingButton from '../components/LoadingButton';
@@ -21,13 +22,13 @@ class AddData extends React.Component {
         super(props);
 
         this.state = {
-            name: 'Hospital',
-            location: 'Kat',
-            lat: '12',
-            lang: '34',
+            name: '',
+            location: '',
+            phone: '',
+            lat: '',
+            long: '',
             type: 'private',
-            fee: '500',
-            loadingButton: false
+            fee: ''
         };
     }
 
@@ -35,19 +36,22 @@ class AddData extends React.Component {
         console.log('Given Data:', this.state);
         console.log('navigation: ', this.props.navigation)
 
-        // this.setState({
-        //     name: null,
-        //     location: null,
-        //     lat: null,
-        //     lang: null,
-        //     type: null,
-        //     fee: null,
-        //     loadingButton: false
-        // });
-        
-        this.props.navigation.navigate('ViewData', {
-            data: this.state.name
+        firebase.database().ref(`/hospital`)
+            .push(this.state);
+
+        this.setState({
+            name: '',
+            location: '',
+            phone: '',
+            lat: '',
+            long: '',
+            type: 'private',
+            fee: ''
         });
+        
+        // this.props.navigation.navigate('ViewData', {
+        //     data: this.state.name
+        // });
 
         // this.props.navigation.navigate('ViewData');
     }
@@ -78,6 +82,13 @@ class AddData extends React.Component {
                         onChangeText={location => this.setState({ location })}
                     />
 
+                    <Text style={styles.labelStyle} >Phone</Text>
+                    <TextInput 
+                        value={this.state.phone}
+                        style={styles.inputBoxStyle}
+                        onChangeText={phone => this.setState({ phone })}
+                    />
+
                     <Text style={styles.labelStyle} >Latitude</Text>
                     <TextInput 
                         value={this.state.lat}
@@ -87,9 +98,16 @@ class AddData extends React.Component {
 
                     <Text style={styles.labelStyle} >Longitude</Text>
                     <TextInput 
-                        value={this.state.lang}
+                        value={this.state.long}
                         style={styles.inputBoxStyle}
-                        onChangeText={lang => this.setState({ lang })}
+                        onChangeText={long => this.setState({ long })}
+                    />
+
+                    <Text style={styles.labelStyle} >General Fee</Text>
+                    <TextInput 
+                        value={this.state.fee}
+                        style={styles.inputBoxStyle}
+                        onChangeText={fee => this.setState({ fee })}
                     />
 
                     <Text style={styles.labelStyle} >Type</Text>
@@ -105,13 +123,6 @@ class AddData extends React.Component {
                                 <Picker.Item label="Public" value="public" />
                         </Picker>
                     </View>
-
-                    <Text style={styles.labelStyle} >General Fee</Text>
-                    <TextInput 
-                        value={this.state.fee}
-                        style={styles.inputBoxStyle}
-                        onChangeText={fee => this.setState({ fee })}
-                    />
 
                     <View style={styles.buttonStyle}>
                         { this.renderButton() }
