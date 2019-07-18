@@ -8,9 +8,12 @@ class ViewData extends React.Component {
     };
 
     render() {
+        const data = this.props.navigation.getParam('data', null);
+
         return(
             <View style={StyleSheet.container}>
                 <Text>ViewData Page</Text>
+                <Text>{data}</Text>
             </View>
         );
     }

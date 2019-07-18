@@ -10,7 +10,6 @@ import {
 
 import Button from '../components/Button';
 import LoadingButton from '../components/LoadingButton';
-import NavBar from '../components/NavBar';
 
 class AddData extends React.Component {
     static navigationOptions = {
@@ -22,28 +21,35 @@ class AddData extends React.Component {
         super(props);
 
         this.state = {
-            name: null,
-            location: null,
-            lat: null,
-            lang: null,
-            type: null,
-            fee: null,
+            name: 'Hospital',
+            location: 'Kat',
+            lat: '12',
+            lang: '34',
+            type: 'private',
+            fee: '500',
             loadingButton: false
         };
     }
 
     addData() {
         console.log('Given Data:', this.state);
+        console.log('navigation: ', this.props.navigation)
 
-        this.setState({
-            name: null,
-            location: null,
-            lat: null,
-            lang: null,
-            type: null,
-            fee: null,
-            loadingButton: false
+        // this.setState({
+        //     name: null,
+        //     location: null,
+        //     lat: null,
+        //     lang: null,
+        //     type: null,
+        //     fee: null,
+        //     loadingButton: false
+        // });
+        
+        this.props.navigation.navigate('ViewData', {
+            data: this.state.name
         });
+
+        // this.props.navigation.navigate('ViewData');
     }
 
     renderButton() {
