@@ -23,7 +23,7 @@ class ViewData extends React.Component {
         ref.on('value', (snap) => {
             const hospitals = [];
 
-            console.log(snap.val());
+            console.log('snap.val(): ', snap.val());
             
             snap.forEach((child) => {
                 const { name, location, phone, lat, long, fee, type } = child.val();
@@ -38,6 +38,8 @@ class ViewData extends React.Component {
                     type
                 });
             })
+
+            console.log('hospitals:', hospitals);
             
             this.setState({
                 hospitals
