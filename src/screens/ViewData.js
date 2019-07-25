@@ -8,18 +8,82 @@ class ViewData extends React.Component {
         title: 'View data'
     };
 
-    renderData() {
+    constructor(props) {
+        super(props);
+
+        this.state={
+            hospitals: []
+        }
+    }
+
+    componentWillMount() {
         var ref = firebase.database().ref(`/hospital`);
 
-        ref.once('value', function(snapshot) {
-            snapshot.forEach(function(childSnapshot) {
-                var childKey = childSnapshot.key;
-                var childData = childSnapshot.val();
-                
-                console.log(`childKey: ${childKey}
-                childData: ${childData}`);
+        console.log('new log');
+        ref.on('value', (snap) => {
+            const hospitals = [];
+
+            console.log(snap.val());
+            
+            snap.forEach((child) => {
+                const { name, location, phone, lat, long, fee, type } = child.val();
+                hospitals.push({
+                    key: child.key,
+                    name,
+                    location,
+                    phone,
+                    lat,
+                    long,
+                    fee,
+                    type
+                });
+            })
+            
+            this.setState({
+                hospitals
             });
-        });
+        })
+
+        // ref.on('value', function(snapshot) {
+        //     snapshot.forEach(function(childSnapshot) {
+        //         childKey = childSnapshot.key;
+        //         childData = childSnapshot.val();
+                
+        //         console.log('new data');
+        //         console.log('childKey:', childKey);
+        //         console.log('childData:', childData);
+        //         console.log('childData.name:', childData.name);
+        //         console.log('childData.location:', childData.location);
+        //         console.log('\n');
+                
+        //         this.setState({
+        //             key: childKey,
+        //             name: childData.name,
+        //             location: childData.location,
+        //             phone: childData.phone,
+        //             lat: childData.lat,
+        //             long: childData.long,
+        //             fee: childData.fee,
+        //             type: childData.type
+        //         });
+
+        //     });
+        // });
+    }
+
+    renderData() {
+        var i;
+        const returnText = [];
+
+        for (i = 0; i < this.state.hospitals.length; i++){
+            for (var key in this.state.hospitals[i]) {
+                if (this.state.hospitals[i].hasOwnProperty(key)) {
+                    returnText.push(<Text>{key}: {this.state.hospitals[i][key]}</Text>);
+                }
+            }
+        }
+
+        return returnText;
     }
     
     render() {
@@ -27,7 +91,7 @@ class ViewData extends React.Component {
 
         return(
             <View style={StyleSheet.container}>
-                <Text>{this.renderData()}</Text>
+                {this.renderData()}
             </View>
         );
     }
