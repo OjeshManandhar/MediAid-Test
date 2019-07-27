@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { ScrollView, Text, StyleSheet } from 'react-native';
 import firebase from 'firebase';
 
 class ViewData extends React.Component {
@@ -17,10 +17,10 @@ class ViewData extends React.Component {
     }
 
     componentWillMount() {
-        var ref = firebase.database().ref(`/hospital`);
+        var ref = firebase.database().ref(`/hospitals`);
 
         console.log('new log');
-        ref.on('value', (snap) => {
+        ref.once('value', (snap) => {
             const hospitals = [];
 
             console.log('snap.val(): ', snap.val());
@@ -78,11 +78,13 @@ class ViewData extends React.Component {
         const returnText = [];
 
         for (i = 0; i < this.state.hospitals.length; i++){
+            returnText.push(<Text>counter: {i}</Text>);
             for (var key in this.state.hospitals[i]) {
                 if (this.state.hospitals[i].hasOwnProperty(key)) {
                     returnText.push(<Text>{key}: {this.state.hospitals[i][key]}</Text>);
                 }
             }
+            returnText.push(<Text></Text>);
         }
 
         return returnText;
@@ -92,9 +94,9 @@ class ViewData extends React.Component {
         const data = this.props.navigation.getParam('data', null);
 
         return(
-            <View style={StyleSheet.container}>
+            <ScrollView style={StyleSheet.container}>
                 {this.renderData()}
-            </View>
+            </ScrollView>
         );
     }
 }

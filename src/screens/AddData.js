@@ -27,7 +27,7 @@ class AddData extends React.Component {
             phone: '',
             lat: '',
             long: '',
-            type: 'private',
+            type: 'Private',
             fee: ''
         };
     }
@@ -36,18 +36,21 @@ class AddData extends React.Component {
         console.log('Given Data:', this.state);
         console.log('navigation: ', this.props.navigation)
 
-        firebase.database().ref(`/hospital`)
-            .push(this.state);
+        firebase.database().ref(`/hospitals`)
+            .push(this.state)
+            .then(() => {
+                this.setState({
+                    name: '',
+                    location: '',
+                    phone: '',
+                    lat: '',
+                    long: '',
+                    type: 'Private',
+                    fee: ''
+                });
+            });
 
-        this.setState({
-            name: '',
-            location: '',
-            phone: '',
-            lat: '',
-            long: '',
-            type: 'private',
-            fee: ''
-        });
+        
         
         // this.props.navigation.navigate('ViewData', {
         //     data: this.state.name
@@ -119,8 +122,8 @@ class AddData extends React.Component {
                                 this.setState({type: itemValue})
                             }
                         >
-                                <Picker.Item label="Private" value="private" />
-                                <Picker.Item label="Public" value="public" />
+                            <Picker.Item label="Private" value="Private" />
+                            <Picker.Item label="Public" value="Public" />
                         </Picker>
                     </View>
 
