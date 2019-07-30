@@ -2,6 +2,7 @@ import React from 'react';
 import {
     View,
     Text,
+    PermissionsAndroid,
     StyleSheet
 } from 'react-native';
 
@@ -10,6 +11,23 @@ class UserLoc extends React.Component {
         header: undefined,
         title: 'User Location'
     };
+
+    // For asking permission
+    // import 'PermissionsAndroid' from 'react-native'
+    componentDidMount() {
+        PermissionsAndroid.requestMultiple(
+            [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
+            {
+                title: 'Give Location Permission',
+                message: 'App needs location permission to find your position.'
+            }
+        ).then(granted => {
+            console.log(granted);
+        }).catch(err => {
+            console.warn(err);
+        });
+    }
     
     render() {
         return (
