@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
-import { View, Text, Switch, StyleSheet, PermissionsAndroid } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, Switch, StyleSheet, PermissionsAndroid } from 'react-native';
+
+import Button from './../components/Button';
+import LoadingButton from './../components/LoadingButton';
 
 class SwichExample extends Component {
     state = {
         initialPosition: 'unknown',
-        lastPosition: 'unknown',
+        // lastPosition: 'unknown',
+        loading: false
     }
 
-    watchID: ?number = null;
+    // watchID: ?number = null;
 
     componentDidMount = () => {
         PermissionsAndroid.requestMultiple(
@@ -23,34 +27,69 @@ class SwichExample extends Component {
             console.warn(err);
         });
 
+        // navigator.geolocation.getCurrentPosition(
+        //     (position) => {
+        //         const initialPosition = JSON.stringify(position);
+        //         this.setState({ initialPosition });
+        //     },
+        //     (error) => alert('Initial ' + error.message), {
+        //         enableHighAccuracy: true, 
+        //         timeout: 20000, 
+        //         maximumAge: 1000 
+        //     }
+        // );
+
+        // this.watchID = navigator.geolocation.watchPosition(
+        //     (position) => {
+        //         const lastPosition = JSON.stringify(position);
+        //         this.setState({ lastPosition });
+        //     },
+        //     (error) => alert('Current ' + error.message), {
+        //         enableHighAccuracy: true, 
+        //         timeout: 2000, 
+        //         maximumAge: 1000,
+        //         distanceFilter: 5,
+        //         useSignificantChanges: true
+        //     }
+        // );
+    }
+
+    // componentWillUnmount = () => {
+    //     navigator.geolocation.clearWatch(this.watchID);
+    // }
+
+    findLocation() {
+        this.setState({
+            loading: true
+        });
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
                 const initialPosition = JSON.stringify(position);
-                this.setState({ initialPosition });
+                this.setState({ 
+                    initialPosition,
+                    loading: false
+                });
             },
-            (error) => alert('Initial ' + error.message), {
+            (error) => {
+                this.setState({
+                    loading: false
+                });
+                alert('Initial ' + error.message);
+            }, {
                 enableHighAccuracy: true, 
                 timeout: 20000, 
                 maximumAge: 1000 
             }
         );
-        this.watchID = navigator.geolocation.watchPosition(
-            (position) => {
-                const lastPosition = JSON.stringify(position);
-                this.setState({ lastPosition });
-            },
-            (error) => alert('Current ' + error.message), {
-                enableHighAccuracy: true, 
-                timeout: 2000, 
-                maximumAge: 1000,
-                distanceFilter: 5,
-                useSignificantChanges: true
-            }
-        );
     }
 
-    componentWillUnmount = () => {
-        navigator.geolocation.clearWatch(this.watchID);
+    renderButton() {
+        if (this.state.loading) {
+            return <LoadingButton />
+        }
+
+        return <Button onPress={() => this.findLocation()}>Find Location</Button>
     }
 
     render() {
@@ -64,13 +103,15 @@ class SwichExample extends Component {
                     {this.state.initialPosition}
                 </Text>
                 
-                <Text style = {styles.boldText}>
+                {/* <Text style = {styles.boldText}>
                     Current position:
                 </Text>
                 
                 <Text>
                     {this.state.lastPosition}
-                </Text>
+                </Text> */}
+
+                {this.renderButton()}
             </View>
         )
     }
