@@ -1,13 +1,28 @@
 import React, { Component } from 'react'
-import { View, Text, Switch, StyleSheet} from 'react-native'
+import { View, Text, Switch, StyleSheet, PermissionsAndroid } from 'react-native'
 
 class SwichExample extends Component {
     state = {
         initialPosition: 'unknown',
         lastPosition: 'unknown',
     }
+
     watchID: ?number = null;
+
     componentDidMount = () => {
+        PermissionsAndroid.requestMultiple(
+            [PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+            PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION],
+            {
+                title: 'Give Location Permission',
+                message: 'App needs location permission to find your position.'
+            }
+        ).then(granted => {
+            console.log(granted);
+        }).catch(err => {
+            console.warn(err);
+        });
+
         navigator.geolocation.getCurrentPosition(
             (position) => {
             const initialPosition = JSON.stringify(position);
@@ -21,32 +36,33 @@ class SwichExample extends Component {
             this.setState({ lastPosition });
         });
     }
+
     componentWillUnmount = () => {
         navigator.geolocation.clearWatch(this.watchID);
     }
+
     render() {
         return (
             <View style = {styles.container}>
-            <Text style = {styles.boldText}>
-                Initial position:
-            </Text>
-            
-            <Text>
-                {this.state.initialPosition}
-            </Text>
-            
-            <Text style = {styles.boldText}>
-                Current position:
-            </Text>
-            
-            <Text>
-                {this.state.lastPosition}
-            </Text>
+                <Text style = {styles.boldText}>
+                    Initial position:
+                </Text>
+                
+                <Text>
+                    {this.state.initialPosition}
+                </Text>
+                
+                <Text style = {styles.boldText}>
+                    Current position:
+                </Text>
+                
+                <Text>
+                    {this.state.lastPosition}
+                </Text>
             </View>
         )
     }
 }
-export default SwichExample
 
 const styles = StyleSheet.create ({
     container: {
@@ -58,4 +74,6 @@ const styles = StyleSheet.create ({
         fontSize: 30,
         color: 'red',
     }
-})
+});
+
+export default SwichExample;
