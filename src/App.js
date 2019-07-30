@@ -7,13 +7,15 @@ import Home from './screens/Home';
 import Away from './screens/Away';
 import AddData from './screens/AddData';
 import ViewData from './screens/ViewData';
+import UserLoc from './screens/UserLoc';
 
 const AppNavigator = createStackNavigator(
     {
         Home: { screen: Home },
         Away: { screen: Away },
         AddData: { screen: AddData },
-        ViewData: { screen: ViewData }
+        ViewData: { screen: ViewData },
+        UserLoc: { screen: UserLoc }
     },
     {
         initialRouteName: "Home",
