@@ -25,16 +25,28 @@ class SwichExample extends Component {
 
         navigator.geolocation.getCurrentPosition(
             (position) => {
-            const initialPosition = JSON.stringify(position);
-            this.setState({ initialPosition });
+                const initialPosition = JSON.stringify(position);
+                this.setState({ initialPosition });
             },
-            (error) => alert(error.message),
-            { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 }
+            (error) => alert('Initial ' + error.message), {
+                enableHighAccuracy: true, 
+                timeout: 20000, 
+                maximumAge: 1000 
+            }
         );
-        this.watchID = navigator.geolocation.watchPosition((position) => {
-            const lastPosition = JSON.stringify(position);
-            this.setState({ lastPosition });
-        });
+        this.watchID = navigator.geolocation.watchPosition(
+            (position) => {
+                const lastPosition = JSON.stringify(position);
+                this.setState({ lastPosition });
+            },
+            (error) => alert('Current ' + error.message), {
+                enableHighAccuracy: true, 
+                timeout: 2000, 
+                maximumAge: 1000,
+                distanceFilter: 5,
+                useSignificantChanges: true
+            }
+        );
     }
 
     componentWillUnmount = () => {
