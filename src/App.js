@@ -8,6 +8,7 @@ import Away from './screens/Away';
 import AddData from './screens/AddData';
 import ViewData from './screens/ViewData';
 import UserLoc from './screens/UserLoc';
+import DateTimePicker from './screens/DateTimePicker';
 
 const AppNavigator = createStackNavigator(
     {
@@ -15,7 +16,8 @@ const AppNavigator = createStackNavigator(
         Away: { screen: Away },
         AddData: { screen: AddData },
         ViewData: { screen: ViewData },
-        UserLoc: { screen: UserLoc }
+        UserLoc: { screen: UserLoc },
+        DTPicker: { screen: DateTimePicker }
     },
     {
         initialRouteName: "Home",

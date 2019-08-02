@@ -29,6 +29,10 @@ class Home extends React.Component {
                     <GotoText navigation = {this.props.navigation} target = 'UserLoc' />
                 </View>
 
+                <View style = { gotoTextStyle } >
+                    <GotoText navigation = {this.props.navigation} target = 'DTPicker' />
+                </View>
+
                 <View style = { navBarStyle } >
                     <NavBar navigation = {this.props.navigation} selected = 'Home' />
                 </View>
