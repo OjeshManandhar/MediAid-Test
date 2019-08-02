@@ -15,7 +15,9 @@ class DateTimePicker extends React.Component {
     render() {
         return(
             <View style={styles.container}>
-                <Text>Date Time Picker</Text>
+                <TouchableHighlight>
+                    <Text>Date Time Picker</Text>
+                </TouchableHighlight>
             </View>
         );
     }
