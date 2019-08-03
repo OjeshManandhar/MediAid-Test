@@ -148,12 +148,16 @@ class DateTimePicker extends React.Component {
     }
 
     render() {
+        const { container, text } = this.props.pickerStyle;
+
         return(
-            <TouchableOpacity 
+            <TouchableOpacity
                 onPress={() => this.showPickers()}
             >
-                <View style={styles.pickerContainer}>
-                    <Text style={{ fontSize: 18 }}>{this.dateToText(this.state.date)}</Text>
+                <View style={[styles.pickerContainer, container]}>
+                    <Text style={[styles.pickerText, text]}>
+                        {this.dateToText(this.state.date)}
+                    </Text>
                 </View>
             </TouchableOpacity>
         );
@@ -161,11 +165,6 @@ class DateTimePicker extends React.Component {
 }
 
 const styles=StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
     pickerContainer: {
         width: 300,
         height: 40,
@@ -176,7 +175,14 @@ const styles=StyleSheet.create({
         borderWidth: 2,
         borderRadius: 20,
         borderColor: 'gray'
+    },
+    pickerText: {
+        fontSize: 18
     }
 });
+
+DateTimePicker.defaultProps = {
+    pickerStyle: {}
+};
 
 export default DateTimePicker;

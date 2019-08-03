@@ -41,12 +41,23 @@ class Picker extends React.Component {
     }
 
     render() {
+        const test = {
+            container: styles.pickerContainer,
+            text: styles.pickerText
+        }
+
+        console.log('test:', test);
+
         return(
             <View style={styles.container}>
                 <Text>Start Date:</Text>
                 <DateTimePicker 
                     initialDate={this.state.startDate} 
                     minDate={new Date().toString()}
+                    pickerStyle={{
+                        container: styles.pickerContainer,
+                        text: styles.pickerText
+                    }}
                     onDateChange={(date) => {
                         this.setState({
                             startDate: date
@@ -75,6 +86,20 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    pickerContainer: {
+        width: 300,
+        height: 40,
+        justifyContent: 'center',
+        paddingRight: 20,
+        paddingLeft: 20,
+        marginBottom: 20,
+        borderWidth: 2,
+        borderRadius: 20,
+        borderColor: 'gray'
+    },
+    pickerText: {
+        fontSize: 18
     }
 });
 
