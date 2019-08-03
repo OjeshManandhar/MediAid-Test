@@ -26,9 +26,9 @@ class Picker extends React.Component {
         const start = new Date(this.state.startDate),
             end = new Date(this.state.endDate);
 
-        console.log('startDate:', start.getTime());
-        console.log('endDate:', end.getTime());
-        console.log('end < start:', end < start);
+        // console.log('startDate:', start.getTime());
+        // console.log('endDate:', end.getTime());
+        // console.log('end < start:', end < start);
 
         if (end < start) {
             this.setState({
@@ -36,8 +36,8 @@ class Picker extends React.Component {
             });
         }
 
-        console.log('startDate:', this.state.startDate);
-        console.log('endDate:', this.state.endDate);
+        // console.log('startDate:', this.state.startDate);
+        // console.log('endDate:', this.state.endDate);
     }
 
     render() {
