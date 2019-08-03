@@ -51,9 +51,9 @@ class DateTimePicker extends React.Component {
         // Time Picker
         try {
             const {action, hour, minute} = await TimePickerAndroid.open({
-                hour: new Date().getHours,
-                minute: new Date().getMinutes,
-                is24Hour: true, // Will display '2 PM'
+                hour: new Date(this.state.date).getHours(),
+                minute: new Date(this.state.date).getMinutes(),
+                is24Hour: false, // Will display '2 PM'
             });
 
             if (action !== TimePickerAndroid.dismissedAction) {
@@ -71,14 +71,53 @@ class DateTimePicker extends React.Component {
         console.log('Selected:', selected);
 
         this.setState({
-            date: selected
+            date: selected.toString()
         });
     }
 
     dateToText(d) {
         const date = new Date(d);
+        var text = `${date.getFullYear()} - `;
 
-        return `${date.getFullYear()} - ${date.getMonth() + 1} - ${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+        if ((date.getMonth() + 1) < 10) {
+            text += `0${date.getMonth() + 1} - `;
+        } else {
+            text += `${date.getMonth() + 1} - `;
+        }
+
+        if (date.getDate() < 10) {
+            text += `0${date.getDate()}   `;
+        } else {
+            text += `${date.getDate()}   `;
+        }
+
+        if (date.getHours() === 0) {
+            text += '12 : ';
+        } else if (date.getHours() < 10) {
+            text += `0${date.getHours()} : `;
+        } else if (date.getHours() >= 12) {
+            if ((date.getHours() - 12) === 0) {
+                text += '12 : ';
+            } else if ((date.getHours() - 12) < 10) {
+                text += `0${date.getHours() - 12} : `;
+            } else {
+                text =+ `${date.getHours() - 12} : `;
+            }
+        }
+
+        if (date.getMinutes() < 10) {
+            text += `0${date.getMinutes()} `;
+        } else {
+            text += `${date.getMinutes()} `;
+        }
+
+        if (date.getHours() < 12) {
+            text += 'AM';
+        } else {
+            text += 'PM';
+        }
+
+        return text;
     }
 
     render() {
@@ -88,7 +127,7 @@ class DateTimePicker extends React.Component {
                     onPress={() => this.showPickers()}
                 >
                     <View style={styles.pickerContainer}>
-                        <Text>{this.dateToText(this.state.date)}</Text>
+                        <Text style={{ fontSize: 18 }}>{this.dateToText(this.state.date)}</Text>
                     </View>
                 </TouchableOpacity>
             </View>
@@ -106,9 +145,8 @@ const styles=StyleSheet.create({
         width: 300,
         height: 40,
         justifyContent: 'center',
-        alignItems: 'center',
-        paddingRight: 10,
-        paddingLeft: 10,
+        paddingRight: 20,
+        paddingLeft: 20,
         marginBottom: 20,
         borderWidth: 2,
         borderRadius: 20,
