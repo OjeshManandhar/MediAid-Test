@@ -128,7 +128,7 @@ class DateTimePicker extends React.Component {
             } else if ((date.getHours() - 12) < 10) {
                 text += `0${date.getHours() - 12} : `;
             } else {
-                text =+ `${date.getHours() - 12} : `;
+                text += `${date.getHours() - 12} : `;
             }
         }
 
