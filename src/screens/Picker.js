@@ -22,20 +22,43 @@ class Picker extends React.Component {
         }
     }
 
+    chooseEndDate() {
+        const start = new Date(this.state.startDate),
+            end = new Date(this.state.endDate);
+
+        console.log('startDate:', start.getTime());
+        console.log('endDate:', end.getTime());
+        console.log('end < start:', end < start);
+
+        if (end < start) {
+            this.setState({
+                endDate: this.state.startDate
+            });
+        }
+
+        console.log('startDate:', this.state.startDate);
+        console.log('endDate:', this.state.endDate);
+    }
+
     render() {
         return(
             <View style={styles.container}>
                 <Text>Start Date:</Text>
                 <DateTimePicker 
                     initialDate={this.state.startDate} 
-                    onDateChange={(date) => this.setState({
-                        startDate: date
-                    })} 
+                    minDate={new Date().toString()}
+                    onDateChange={(date) => {
+                        this.setState({
+                            startDate: date
+                        });
+                        this.chooseEndDate();
+                    }}
                 />
 
                 <Text>End Date:</Text>
                 <DateTimePicker 
-                    initialDate={this.state.startDate} 
+                    initialDate={this.state.endDate} 
+                    minDate={this.state.startDate}
                     onDateChange={(date) => this.setState({
                         endDate: date
                     })} 

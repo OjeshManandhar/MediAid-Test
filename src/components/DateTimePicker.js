@@ -43,7 +43,7 @@ class DateTimePicker extends React.Component {
                 // Use `new Date()` for current date.
                 // May 25 2020. Month 0 is January.
                 date: this.state.date,
-                minDate: new Date(this.props.initialDate),
+                minDate: new Date(this.props.minDate),
                 mode: 'calendar'
             });
             if (action !== DatePickerAndroid.dismissedAction) {
@@ -51,7 +51,7 @@ class DateTimePicker extends React.Component {
 
                 selected.setFullYear(year, month, day);
 
-                console.log('selected date:', selected.getFullYear(), selected.getMonth() + 1, selected.getDate());
+                // console.log('selected date:', selected.getFullYear(), selected.getMonth() + 1, selected.getDate());
 
                 // Time Picker will only be called if date is picked and not Canceled
                 try {
@@ -60,17 +60,17 @@ class DateTimePicker extends React.Component {
                         minute: this.state.date.getMinutes(),
                         is24Hour: true, // Will display '2 PM'
                     });
-        
+
                     if (action !== TimePickerAndroid.dismissedAction) {
                         // Selected hour (0-23), minute (0-59)
-        
+
                         selected.setHours(hour);
                         selected.setMinutes(minute);
-        
-                        console.log('selected time:', selected.getHours(), selected.getMinutes());
+
+                        // console.log('selected time:', selected.getHours(), selected.getMinutes());
 
                         // Save the selected date to state
-                        console.log('Selected:', selected);
+                        // console.log('Selected:', selected);
                         this.setState({
                             date: selected.toString()
                         });
@@ -107,6 +107,8 @@ class DateTimePicker extends React.Component {
             text += '12 : ';
         } else if (date.getHours() < 10) {
             text += `0${date.getHours()} : `;
+        } else if (date.getHours() >= 10 && date.getHours() < 12) {
+            text += `${date.getHours()} : `;
         } else if (date.getHours() >= 12) {
             if ((date.getHours() - 12) === 0) {
                 text += '12 : ';

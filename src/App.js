@@ -20,7 +20,7 @@ const AppNavigator = createStackNavigator(
         Picker: { screen: Picker }
     },
     {
-        initialRouteName: "Picker",
+        initialRouteName: "Home",
         defaultNavigationOptions: {
             header: null
         }
