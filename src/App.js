@@ -20,7 +20,7 @@ const AppNavigator = createStackNavigator(
         DTPicker: { screen: DateTimePicker }
     },
     {
-        initialRouteName: "Home",
+        initialRouteName: "DTPicker",
         defaultNavigationOptions: {
             header: null
         }
