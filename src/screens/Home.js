@@ -30,7 +30,7 @@ class Home extends React.Component {
                 </View>
 
                 <View style = { gotoTextStyle } >
-                    <GotoText navigation = {this.props.navigation} target = 'DTPicker' />
+                    <GotoText navigation = {this.props.navigation} target = 'Picker' />
                 </View>
 
                 <View style = { navBarStyle } >

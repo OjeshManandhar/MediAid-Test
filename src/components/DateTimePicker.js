@@ -9,16 +9,11 @@ import {
 } from 'react-native';
 
 class DateTimePicker extends React.Component {
-    static navigationOptions = {
-        header: undefined,
-        title: 'Date Time Picker'
-    };
-
     constructor(props) {
         super(props);
 
         this.state={
-            date: new Date().toString()
+            date: new Date(this.props.date)
         }
 
         this.showPickers = this.showPickers.bind(this);
@@ -33,7 +28,7 @@ class DateTimePicker extends React.Component {
             const {action, year, month, day} = await DatePickerAndroid.open({
                 // Use `new Date()` for current date.
                 // May 25 2020. Month 0 is January.
-                date: new Date(this.state.date),
+                date: this.state.date,
                 minDate: new Date(),
                 mode: 'calendar'
             });
@@ -47,8 +42,8 @@ class DateTimePicker extends React.Component {
                 // Time Picker will only be called if date is picked and not Canceled
                 try {
                     const {action, hour, minute} = await TimePickerAndroid.open({
-                        hour: new Date(this.state.date).getHours(),
-                        minute: new Date(this.state.date).getMinutes(),
+                        hour: this.state.date.getHours(),
+                        minute: this.state.date.getMinutes(),
                         is24Hour: true, // Will display '2 PM'
                     });
         
@@ -62,10 +57,12 @@ class DateTimePicker extends React.Component {
 
                         // Save the selected date to state
                         console.log('Selected:', selected);
-
                         this.setState({
                             date: selected.toString()
                         });
+
+                        // To return selected date as string 
+                        this.props.onDateChange(selected.toString());
                     }
                 } catch ({code, message}) {
                     console.warn('Cannot open time picker', message);
@@ -123,15 +120,13 @@ class DateTimePicker extends React.Component {
 
     render() {
         return(
-            <View style={styles.container}>
-                <TouchableOpacity 
-                    onPress={() => this.showPickers()}
-                >
-                    <View style={styles.pickerContainer}>
-                        <Text style={{ fontSize: 18 }}>{this.dateToText(this.state.date)}</Text>
-                    </View>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity 
+                onPress={() => this.showPickers()}
+            >
+                <View style={styles.pickerContainer}>
+                    <Text style={{ fontSize: 18 }}>{this.dateToText(this.state.date)}</Text>
+                </View>
+            </TouchableOpacity>
         );
     }
 }
