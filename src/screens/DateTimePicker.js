@@ -43,36 +43,37 @@ class DateTimePicker extends React.Component {
                 selected.setFullYear(year, month, day);
 
                 console.log('selected date:', selected.getFullYear(), selected.getMonth() + 1, selected.getDate());
-        }
+
+                // Time Picker will only be called if date is picked and not Canceled
+                try {
+                    const {action, hour, minute} = await TimePickerAndroid.open({
+                        hour: new Date(this.state.date).getHours(),
+                        minute: new Date(this.state.date).getMinutes(),
+                        is24Hour: true, // Will display '2 PM'
+                    });
+        
+                    if (action !== TimePickerAndroid.dismissedAction) {
+                        // Selected hour (0-23), minute (0-59)
+        
+                        selected.setHours(hour);
+                        selected.setMinutes(minute);
+        
+                        console.log('selected time:', selected.getHours(), selected.getMinutes());
+
+                        // Save the selected date to state
+                        console.log('Selected:', selected);
+
+                        this.setState({
+                            date: selected.toString()
+                        });
+                    }
+                } catch ({code, message}) {
+                    console.warn('Cannot open time picker', message);
+                }
+            }
         } catch ({code, message}) {
             console.warn('Cannot open date picker', message);
         }
-
-        // Time Picker
-        try {
-            const {action, hour, minute} = await TimePickerAndroid.open({
-                hour: new Date(this.state.date).getHours(),
-                minute: new Date(this.state.date).getMinutes(),
-                is24Hour: false, // Will display '2 PM'
-            });
-
-            if (action !== TimePickerAndroid.dismissedAction) {
-                // Selected hour (0-23), minute (0-59)
-
-                selected.setHours(hour);
-                selected.setMinutes(minute);
-
-                console.log('selected time:', selected.getHours(), selected.getMinutes());
-            }
-        } catch ({code, message}) {
-            console.warn('Cannot open time picker', message);
-        }
-
-        console.log('Selected:', selected);
-
-        this.setState({
-            date: selected.toString()
-        });
     }
 
     dateToText(d) {
