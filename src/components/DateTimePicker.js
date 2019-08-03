@@ -75,8 +75,8 @@ class DateTimePicker extends React.Component {
                         // console.log('selected time:', selected.getHours(), selected.getMinutes());
 
                         // Save the selected date to state
-                        console.log('Selected:', selected);
-                        console.log('minDate:', new Date(this.state.mDate));
+                        // console.log('Selected:', selected);
+                        // console.log('minDate:', new Date(this.state.mDate));
                         if (selected > new Date(this.state.mDate)) {
                             this.setState({
                                 date: selected.toString()

@@ -41,13 +41,6 @@ class Picker extends React.Component {
     }
 
     render() {
-        const test = {
-            container: styles.pickerContainer,
-            text: styles.pickerText
-        }
-
-        console.log('test:', test);
-
         return(
             <View style={styles.container}>
                 <Text>Start Date:</Text>
