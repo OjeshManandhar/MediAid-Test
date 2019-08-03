@@ -59,9 +59,11 @@ class Picker extends React.Component {
                 <DateTimePicker 
                     initialDate={this.state.endDate} 
                     minDate={this.state.startDate}
-                    onDateChange={(date) => this.setState({
-                        endDate: date
-                    })} 
+                    onDateChange={(date) => 
+                        this.setState({
+                            endDate: date
+                        })
+                    }
                 />
             </View>
         );

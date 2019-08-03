@@ -5,6 +5,7 @@ import {
     TouchableOpacity,
     DatePickerAndroid,
     TimePickerAndroid,
+    Alert,
     StyleSheet
 } from 'react-native';
 
@@ -12,8 +13,10 @@ class DateTimePicker extends React.Component {
     constructor(props) {
         super(props);
 
+        // mDate is the given minDate just keeping state and props different
         this.state={
-            date: new Date()
+            date: new Date(),
+            mDate: new Date() 
         }
 
         this.showPickers = this.showPickers.bind(this);
@@ -21,14 +24,16 @@ class DateTimePicker extends React.Component {
     
     componentDidMount() {
         this.setState({
-            date: new Date(this.props.initialDate)
+            date: new Date(this.props.initialDate),
+            mDate: new Date(this.props.minDate)
         });
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.initialDate !== this.props.initialDate) {
             this.setState({
-                date: new Date(nextProps.initialDate)
+                date: new Date(nextProps.initialDate),
+                mDate: new Date(nextProps.minDate)
             });
         }
     }
@@ -43,7 +48,7 @@ class DateTimePicker extends React.Component {
                 // Use `new Date()` for current date.
                 // May 25 2020. Month 0 is January.
                 date: this.state.date,
-                minDate: new Date(this.props.minDate),
+                minDate: this.state.mDate,
                 mode: 'calendar'
             });
             if (action !== DatePickerAndroid.dismissedAction) {
@@ -70,13 +75,21 @@ class DateTimePicker extends React.Component {
                         // console.log('selected time:', selected.getHours(), selected.getMinutes());
 
                         // Save the selected date to state
-                        // console.log('Selected:', selected);
-                        this.setState({
-                            date: selected.toString()
-                        });
+                        console.log('Selected:', selected);
+                        console.log('minDate:', new Date(this.state.mDate));
+                        if (selected > new Date(this.state.mDate)) {
+                            this.setState({
+                                date: selected.toString()
+                            });
 
-                        // To return selected date as string 
-                        this.props.onDateChange(selected.toString());
+                            // To return selected date as string 
+                            this.props.onDateChange(selected.toString());
+                        } else {
+                            Alert.alert(
+                                'Wrong Date picked',
+                                'Please pick a proper Date'
+                            )
+                        }
                     }
                 } catch ({code, message}) {
                     console.warn('Cannot open time picker', message);
