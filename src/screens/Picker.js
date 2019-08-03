@@ -27,7 +27,7 @@ class Picker extends React.Component {
             <View style={styles.container}>
                 <Text>Start Date:</Text>
                 <DateTimePicker 
-                    date={this.state.startDate} 
+                    initialDate={this.state.startDate} 
                     onDateChange={(date) => this.setState({
                         startDate: date
                     })} 
@@ -35,7 +35,7 @@ class Picker extends React.Component {
 
                 <Text>End Date:</Text>
                 <DateTimePicker 
-                    date={this.state.endDate} 
+                    initialDate={this.state.startDate} 
                     onDateChange={(date) => this.setState({
                         endDate: date
                     })} 

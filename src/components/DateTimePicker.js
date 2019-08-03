@@ -13,10 +13,24 @@ class DateTimePicker extends React.Component {
         super(props);
 
         this.state={
-            date: new Date(this.props.date)
+            date: new Date()
         }
 
         this.showPickers = this.showPickers.bind(this);
+    }
+    
+    componentDidMount() {
+        this.setState({
+            date: new Date(this.props.initialDate)
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.initialDate !== this.props.initialDate) {
+            this.setState({
+                date: new Date(nextProps.initialDate)
+            });
+        }
     }
 
     showPickers = async () => {
@@ -29,7 +43,7 @@ class DateTimePicker extends React.Component {
                 // Use `new Date()` for current date.
                 // May 25 2020. Month 0 is January.
                 date: this.state.date,
-                minDate: new Date(),
+                minDate: new Date(this.props.initialDate),
                 mode: 'calendar'
             });
             if (action !== DatePickerAndroid.dismissedAction) {
