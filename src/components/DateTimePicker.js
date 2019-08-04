@@ -32,7 +32,12 @@ class DateTimePicker extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.initialDate !== this.props.initialDate) {
             this.setState({
-                date: new Date(nextProps.initialDate),
+                date: new Date(nextProps.initialDate)
+            });
+        }
+        
+        if (nextProps.minDate !== this.props.minDate) {
+            this.setState({
                 mDate: new Date(nextProps.minDate)
             });
         }
@@ -86,8 +91,8 @@ class DateTimePicker extends React.Component {
                             this.props.onDateChange(selected.toString());
                         } else {
                             Alert.alert(
-                                'Wrong Date picked',
-                                'Please pick a proper Date'
+                                'Wrong Time picked',
+                                'Please pick a proper time'
                             )
                         }
                     }
